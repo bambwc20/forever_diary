@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "forever_diary",
+    "name": "영원한 일기",
     "slug": "forever_diary",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,20 +13,15 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.moowang.foreverdiary",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+      "package": "com.moowang.foreverdiary",
+      "versionCode": 1
     }
   }
 }
