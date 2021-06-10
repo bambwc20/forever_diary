@@ -1,21 +1,85 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+//react
+import React from "react";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import Constants from "expo-constants";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
+
+//redux
+import { Provider } from "react-redux";
+import store from "./Redux/store";
+
+//navigation
+import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+//StackScreen
+import MyDiaryScreen from "./StackScreen/MyDiaryScreen";
+import OtherDiaryScreen from "./StackScreen/OtherDiaryScreen";
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <SafeAreaView style={styles.container}>
+        <NavigationContainer>
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ focused, color, size }) => {
+                if (focused === true) {
+                  size = 25;
+                } else if (focused === false) {
+                  size = 18;
+                }
+
+                if (route.name === "MyDiaryScreen") {
+                  return <Entypo name="open-book" size={size} color={color} />;
+                } else if (route.name === "OtherDiary") {
+                  return (
+                    <MaterialCommunityIcons
+                      name="human-male-male"
+                      size={size}
+                      color={color}
+                    />
+                  );
+                }
+              },
+            })}
+            tabBarOptions={{
+              activeTintColor: "tomato", // 탭 활성
+              inactiveTintColor: "gray", // 탭 비활성
+            }}
+          >
+            <Tab.Screen
+              name="MyDiaryScreen"
+              component={MyDiaryScreen}
+              options={() => {
+                return {
+                  title: "나의 일기",
+                };
+              }}
+            />
+            <Tab.Screen
+              name="OtherDiary"
+              component={OtherDiaryScreen}
+              options={() => {
+                return {
+                  title: "공유 일기",
+                };
+              }}
+            />
+          </Tab.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
+    </Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: Constants.statusBarHeight,
   },
 });
