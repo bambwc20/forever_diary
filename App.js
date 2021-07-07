@@ -18,6 +18,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MyDiaryScreen from "./StackScreen/MyDiaryScreen";
 import OtherDiaryScreen from "./StackScreen/OtherDiaryScreen";
 
+//Admob
+import { AdMobBanner } from "expo-ads-admob";
+import { AdMobBannerKey } from "./AdmobKey";
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
@@ -72,6 +76,11 @@ export default function App() {
             />
           </Tab.Navigator>
         </NavigationContainer>
+        <AdMobBanner
+          bannerSize="fullBanner"
+          adUnitID={AdMobBannerKey} // Test ID, Replace with your-admob-unit-id
+          servePersonalizedAds={true} // true or false
+        />
       </SafeAreaView>
     </Provider>
   );
